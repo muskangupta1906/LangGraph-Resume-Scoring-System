@@ -39,3 +39,32 @@ flowchart TD
     B --> C[📝 A2: Structuring]
     C --> D[📊 A3: Scoring]
     D --> E[✅ Final Resume Score]
+
+---
+
+## ⚡️** Installation  **
+
+1. **Clone the repository**  
+```bash
+git clone https://github.com/muskangupta1906/LangGraph-Resume-Scoring-System.git
+cd LangGraph-Resume-Scoring-System
+
+2. **Create and activate a virtual environment (recommended)**
+```bash
+# Create venv
+python3 -m venv venv  
+
+# Activate venv
+source venv/bin/activate   # Mac/Linux  
+venv\Scripts\activate      # Windows
+
+3. **Install dependencies**
+```bash
+pip install -r requirements.txt
+
+---
+
+## ▶️** Usage **
+```bash
+streamlit run app.py
+
