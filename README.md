@@ -39,7 +39,7 @@ flowchart TD
     B --> C[📝 A2: Structuring]
     C --> D[📊 A3: Scoring]
     D --> E[✅ Final Resume Score]
-
+```
 ---
 
 ## ⚡️** Installation  **
