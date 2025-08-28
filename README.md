@@ -48,6 +48,7 @@ flowchart TD
 ```bash
 git clone https://github.com/muskangupta1906/LangGraph-Resume-Scoring-System.git
 cd LangGraph-Resume-Scoring-System
+```
 
 2. **Create and activate a virtual environment (recommended)**
 ```bash
@@ -57,10 +58,12 @@ python3 -m venv venv
 # Activate venv
 source venv/bin/activate   # Mac/Linux  
 venv\Scripts\activate      # Windows
+```
 
 3. **Install dependencies**
 ```bash
 pip install -r requirements.txt
+```
 
 ---
 
