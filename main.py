@@ -17,7 +17,7 @@ from langchain.tools import tool
 from datetime import datetime
 
 import os
-import fitz  # PyMuPDF to count PDF pages
+import fitz  
 from google.cloud import vision
 from google.cloud import storage
 
