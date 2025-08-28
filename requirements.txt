@@ -3,9 +3,5 @@ langgraph
 langchain
 # langchain-openai
 langchain-google-genai
-pypdf2
-pdf2image
-pytesseract
-pillow
 pydantic
-python-multipart
+google-cloud-vision

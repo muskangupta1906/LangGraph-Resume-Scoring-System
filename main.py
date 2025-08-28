@@ -159,8 +159,8 @@ def extract_resume_text(file_path: str, bucket_name: str, output_prefix: str = "
         doc = fitz.open(file_path)
         num_pages = len(doc)
 
-        # if num_pages == 1:
-        if 1 == 1:
+        if num_pages == 1:
+        # if 1 == 1:
             with open(file_path, "rb") as f:
                 # print('yup \n')
                 content = f.read()
@@ -172,8 +172,8 @@ def extract_resume_text(file_path: str, bucket_name: str, output_prefix: str = "
             return response.responses[0].responses[0].full_text_annotation.text
         
         else:
-            # print('multi')
-            blob_name = os.path.basename(file_path)
+            print(f'Processing multi-page PDF with {num_pages} pages')
+            blob_name = f"temp_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{os.path.basename(file_path)}"
             gcs_uri = upload_to_gcs(file_path, bucket_name, blob_name)
             output_gcs_uri = f"gs://{bucket_name}/{output_prefix}/"
 
@@ -187,9 +187,23 @@ def extract_resume_text(file_path: str, bucket_name: str, output_prefix: str = "
                 features=[feature], input_config=input_config, output_config=output_config
             )
             operation = client.async_batch_annotate_files(requests=[request])
-            # print("Processing PDF with Vision OCR...")
+            print("Processing PDF with Vision OCR...")
             operation.result(timeout=300)
-            return download_from_gcs(bucket_name, output_prefix)
+
+            extracted_text = download_from_gcs(bucket_name, output_prefix)
+            try:
+                storage_client = storage.Client()
+                bucket = storage_client.bucket(bucket_name)
+                blob = bucket.blob(blob_name)
+                blob.delete()
+                print(f"Cleaned up temporary file: {blob_name}")
+            except Exception as e:
+                print(f"Warning: Could not clean up temporary file {blob_name}: {e}")
+            
+            return extracted_text
+            # return download_from_gcs(bucket_name, output_prefix)
+    else:
+        raise ValueError(f"Unsupported file format: {ext}")
 
 #A2
 #Structure Raw Text to JSON
